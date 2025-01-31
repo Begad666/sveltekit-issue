@@ -18,10 +18,9 @@ const config = {
 			}
 		}),
 
-		// temporarily commenting so it can build on cloudflare pages
-		// env: {
-		// 	publicModule: "/env.js",
-		// }
+		env: {
+			publicModule: "/env.js",
+		}
 	}
 };
 
