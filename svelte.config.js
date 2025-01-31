@@ -8,10 +8,19 @@ const config = {
 	preprocess: vitePreprocess(),
 
 	kit: {
-		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
-		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
-		// See https://svelte.dev/docs/kit/adapters for more information about adapters.
-		adapter: adapter()
+		adapter: adapter({
+			routes: {
+				// when deployed on cloudflare pages, without the publicModule option,
+				// this will break all pre-rendered pages.
+				exclude: ["<all>"],
+				// this is how I fixed it without "publicModule", but it's probably a bug in @sveltejs/adapter-cloudflare.
+				// exclude: ["/_app/immutable/*", "/_app/version.json", "<files>", "<prerendered>"]
+			}
+		}),
+
+		env: {
+			publicModule: "/env.js",
+		}
 	}
 };
 
